@@ -48,3 +48,23 @@ function insertPoiIntoDB($doc) {
         return false;
     }
 }
+
+//==============================================================================
+// getPoisFromDB ()
+//==============================================================================
+function getPoisFromDB($query) {
+    try {
+        $db = connectMongo();
+    } catch (MongoException $e) {
+        return false;
+    }
+
+    $collection = Config::pois_col;
+    try {
+        // Ensure geospatial index exists
+        $db->$collection->ensureIndex(array('location' => '2dsphere'));
+        return $db->$collection->find($query)->limit(0);
+    } catch (MongoCursorException $e){
+        return false; // TODO: differentiate between null (no results) and false/error
+    }
+}

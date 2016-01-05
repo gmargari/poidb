@@ -56,6 +56,56 @@ function addPoi($request, $response, $args) {
 // getPoisByLoc ()
 //==============================================================================
 function getPoisByLoc($request, $response, $args) {
-	$response->getBody()->write("getPoisByLoc");
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('longitude', 'latitude', 'max_distance');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write("Error: not all required parameters are defined");
+        return $response;
+    }
+
+    // Get parameters
+    $longitude = (double)$params['longitude'];
+    $latitude = (double)$params['latitude'];
+    $max_distance = (double)$params['max_distance'];  // should be passed in meters
+
+    // Construct query
+    // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
+    $query = Array(
+        'location' => Array(
+            '$near' => Array(
+                '$geometry' => Array(
+                    'type' => 'Point',
+                    'coordinates' => Array($longitude, $latitude),
+                ),
+                '$maxDistance' => $max_distance,
+            ),
+        ),
+    );
+
+    // Get all pois that satisfy query and construct json to be returned
+    if (($cursor = getPoisFromDB($query))) {
+        $result_pois = array();
+        foreach ($cursor as $poi) {
+            $oid = (String)$poi['_id'];
+            $longitude = $poi['location']['coordinates'][0];
+            $latitude = $poi['location']['coordinates'][1];
+            $name = $poi['name'];
+            $result_pois[$oid] = array(
+                "oid" => $oid,
+                "latitude" => $latitude,
+                "longitude" => $longitude,
+                "name" => $name,
+            );
+        }
+        $data = json_encode($result_pois, JSON_FORCE_OBJECT);
+        $response = $response->withHeader('Content-type', 'application/json');
+        $response->getBody()->write($data);
+    } else  {
+        $response->getBody()->write("Error: could not insert document into db");
+        return $response;
+    }
+
     return $response;
 };
