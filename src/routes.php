@@ -1,10 +1,16 @@
 <?php
-// Routes
 
-$app->get('/[{name}]', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
+// Mapping of routes to functions
+$app->post('/poi', 'addPoi');
+$app->get('/poi/getByLoc', 'getPoisByLoc');
 
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
-});
+// Function definitions
+function addPoi($request, $response, $args) {
+	$response->getBody()->write("addPoi");
+    return $response;
+};
+
+function getPoisByLoc($request, $response, $args) {
+	$response->getBody()->write("getPoisByLoc");
+    return $response;
+};
