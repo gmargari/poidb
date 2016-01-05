@@ -1,13 +1,17 @@
 <?php
 
+//==============================================================================
 // Mapping of routes to functions
+//==============================================================================
 $app->post('/poi', 'addPoi');
 $app->get('/poi/getByLoc', 'getPoisByLoc');
 
 require __DIR__ . '/../src/mongodb.php';
 require __DIR__ . '/../src/util.php';
 
-// Function definitions
+//==============================================================================
+// addPoi ()
+//==============================================================================
 function addPoi($request, $response, $args) {
     $params = $request->getParams();
 
@@ -42,6 +46,9 @@ function addPoi($request, $response, $args) {
     return $response;
 };
 
+//==============================================================================
+// getPoisByLoc ()
+//==============================================================================
 function getPoisByLoc($request, $response, $args) {
 	$response->getBody()->write("getPoisByLoc");
     return $response;
