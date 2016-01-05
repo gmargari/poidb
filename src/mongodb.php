@@ -33,7 +33,7 @@ function connectMongo() {
 //==============================================================================
 // insertPoiIntoDB ()
 //==============================================================================
-function insertPoiIntoDB($object) {
+function insertPoiIntoDB($doc) {
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
@@ -42,7 +42,7 @@ function insertPoiIntoDB($object) {
 
     $collection = Config::pois_col;
     try {
-        $c = $db->$collection->insert($object);
+        $db->$collection->insert($doc);
         return true;
     } catch (MongoCursorException $e){
         return false;

@@ -1,4 +1,8 @@
 <?php
+// TODO: remove in production mode
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 //==============================================================================
 // Mapping of routes to functions
@@ -16,17 +20,19 @@ function addPoi($request, $response, $args) {
     $params = $request->getParams();
 
     // Check all required parameters are defined
-    $required = array('latitude', 'longitude', 'name');
+    $required = array('longitude', 'latitude', 'name');
     if (!allParamsDefined($required, $params)) {
         // TODO: better handling of errors
         $response->getBody()->write("Error: not all required parameters are defined");
         return $response;
     }
 
-    // Construct document
+    // Get parameters
     $longitude = (double)$params['longitude'];
     $latitude = (double)$params['latitude'];
     $name = $params['name'];
+
+    // Construct document to be inserted
     $doc = array(
         'location' => array(
             'coordinates' => array( $longitude, $latitude ),
@@ -35,7 +41,7 @@ function addPoi($request, $response, $args) {
         'name' => $name,
     );
 
-    // Insert into database
+    // Insert document into database
     if (insertPoiIntoDB($doc)) {
         $response->getBody()->write("POI added");
     } else  {
