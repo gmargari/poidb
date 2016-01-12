@@ -66,7 +66,7 @@ function getPoisByLoc($request, $response, $args) {
     // Get all pois that satisfy query and construct json to be returned
     $result_pois = array();
     if (getPoisFromDB($longitude, $latitude, $max_distance, $result_pois)) {
-        $data = json_encode($result_pois, JSON_FORCE_OBJECT);
+        $data = json_encode($result_pois);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($data);
     } else  {
