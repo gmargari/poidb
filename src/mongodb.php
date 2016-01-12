@@ -33,22 +33,28 @@ function connectMongo() {  // TODO: private
 }
 
 //==============================================================================
-// insertPoiIntoDB ()
+// mongodbInsert ()
 //==============================================================================
-function insertPoiIntoDB($doc) {
+function mongodbInsert($collection, $doc) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
         return false;
     }
 
-    $collection = Config::pois_col;
     try {
         $db->$collection->insert($doc);
         return true;
     } catch (MongoCursorException $e){
         return false;
     }
+}
+
+//==============================================================================
+// insertPoiIntoDB ()
+//==============================================================================
+function insertPoiIntoDB($doc) {
+    return mongodbInsert(Config::pois_col, $doc);
 }
 
 //==============================================================================
