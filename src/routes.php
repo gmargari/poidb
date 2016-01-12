@@ -10,6 +10,7 @@ error_reporting(E_ALL);
 $app->post('/poi', 'addPoi');
 $app->get('/poi/getByLoc', 'getPoisByLoc');
 $app->post('/tag', 'addTag');
+$app->post('/rating', 'addRating');
 
 require __DIR__ . '/../src/mongodb.php';
 require __DIR__ . '/../src/util.php';
@@ -98,6 +99,35 @@ function addTag($request, $response, $args) {
         $response->getBody()->write('Tag added');
     } else  {
         $response->getBody()->write('Error: could not insert tag to db');
+        return $response;
+    }
+
+    return $response;
+};
+
+//==============================================================================
+// addRating ()
+//==============================================================================
+function addRating($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid', 'rating', 'name');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+    $name = (string)$params['name'];
+    $rating = (string)$params['rating'];
+
+    // Insert rating into database
+    if (addRatingToDB($oid, $name, $rating)) {
+        $response->getBody()->write('Rating added');
+    } else  {
+        $response->getBody()->write('Error: could not insert rating to db');
         return $response;
     }
 
