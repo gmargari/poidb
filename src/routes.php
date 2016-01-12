@@ -61,7 +61,7 @@ function getPoisByLoc($request, $response, $args) {
     // Get parameters
     $longitude = (double)$params['longitude'];
     $latitude = (double)$params['latitude'];
-    $max_distance = (double)$params['max_distance'];  // should be passed in meters
+    $max_distance = (double)$params['max_distance'] * 1000;  // from km -> meters
 
     // Get all pois that satisfy query and construct json to be returned
     $result_pois = array();
