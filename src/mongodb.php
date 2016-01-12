@@ -119,7 +119,7 @@ function mongodbFindOne($collection, $query, $filter, &$doc) {  // TODO: private
 //==============================================================================
 // ensureGeoSpatialIndexExistsInDB ()
 //==============================================================================
-function ensureGeoSpatialIndexForPoisInDB() {
+function ensureGeoSpatialIndexExistsInDB($collection, $field) {
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
@@ -127,8 +127,7 @@ function ensureGeoSpatialIndexForPoisInDB() {
         return false;
     }
 
-    $collection = Config::pois_col;
-    $db->$collection->ensureIndex(array('location' => '2dsphere'));
+    $db->$collection->ensureIndex(array($field => '2dsphere'));
     return true;
 }
 
@@ -187,7 +186,7 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
     );
 
     $collection = Config::pois_col;
-    ensureGeoSpatialIndexForPoisInDB();
+    ensureGeoSpatialIndexExistsInDB($collection, 'location');
     $filter = array();
     if (!mongodbFind($collection, $query, $filter, $cursor)) {
         return false;
