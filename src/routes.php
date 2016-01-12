@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 //==============================================================================
 $app->post('/poi', 'addPoi');
 $app->get('/poi/getByLoc', 'getPoisByLoc');
-$app->post('/tag', 'addTag');
+// $app->post('/tag', 'addTag');
 $app->post('/rating', 'addRating');
 
 require __DIR__ . '/../src/mongodb.php';
