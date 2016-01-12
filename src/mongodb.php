@@ -9,6 +9,14 @@ Class Config {
     const pois_col  = "pois";
 };
 
+//==============================================================================
+// handleException ()
+//==============================================================================
+function handleException($e) {
+    echo "\n";
+    echo 'Exception in ' . $e->getFile() . ':' . $e->getLine() . ' : "' . $e->getMessage() . '"';
+}
+
 // TODO: Make class
 
 //==============================================================================
@@ -46,6 +54,7 @@ function mongodbInsert($collection, $doc) {  // TODO: private
         $db->$collection->insert($doc);
         return true;
     } catch (MongoCursorException $e){
+        handleException($e);
         return false;
     }
 }
@@ -64,7 +73,8 @@ function mongodbUpdate($collection, $query, $update, $options = array()) {  // T
         $db->$collection->update($query, $update, $options);
         return true;
     } catch (MongoCursorException $e){
-        return false; // TODO: differentiate between null (no results) and false/error
+        handleException($e);
+        return false;
     }
 }
 
@@ -82,7 +92,8 @@ function mongodbFind($collection, $query, $filter, &$cursor) {  // TODO: private
         $cursor = $db->$collection->find($query, $filter)->limit(0);
         return true;
     } catch (MongoCursorException $e){
-        return false; // TODO: differentiate between null (no results) and false/error
+        handleException($e);
+        return false;
     }
 } // TODO: query -> criteria
 
@@ -93,7 +104,8 @@ function ensureGeoSpatialIndexForPoisInDB() {
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
-        return false;  // TODO: Better handling of error
+        handleException($e);
+        return false;
     }
 
     $collection = Config::pois_col;
