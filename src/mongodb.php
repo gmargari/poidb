@@ -186,8 +186,8 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
         $ratings = $poi['ratings'];
         $result_pois[$oid] = array(
             'oid' => $oid,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
+            'latitude' => (string)$latitude,
+            'longitude' => (string)$longitude,
             'name' => $name,
             'tag' => $tags,
             'ratings' => $ratings,
@@ -206,6 +206,8 @@ function addTagToDB($oid, $tag) {
     $filter = array();
 
     if (!mongodbFindOne($collection, $query, $filter, $doc)) {
+        return false;
+    } else if ($doc == NULL) {
         echo $oid . ' was not found in datase';
         return false;
     }
@@ -224,10 +226,13 @@ function addRatingToDB($oid, $name, $rating) {
     $filter = array();
 
     if (!mongodbFindOne($collection, $query, $filter, $doc)) {
+        return false;
+    } else if ($doc == NULL) {
         echo $oid . ' was not found in datase';
         return false;
     }
 
-    array_push($doc['ratings'], array($name => $rating));
+    $new_rating = array( "name" => $name, "rating" => $rating);
+    array_push($doc['ratings'], $new_rating);
     return mongodbUpdate($collection, $query, $doc);
 }
