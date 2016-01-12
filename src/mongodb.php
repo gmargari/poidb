@@ -51,10 +51,20 @@ function mongodbInsert($collection, $doc) {  // TODO: private
 }
 
 //==============================================================================
-// insertPoiIntoDB ()
+// mongodbUpdate ()
 //==============================================================================
-function insertPoiIntoDB($doc) {
-    return mongodbInsert(Config::pois_col, $doc);
+function mongodbUpdate($collection, $query, $update, $options = array()) {  // TODO: private
+    try {
+        $db = connectMongo();
+    } catch (MongoException $e) {
+        return false;
+    }
+
+    try {
+        return $db->$collection->update($query, $update, $options);
+    } catch (MongoCursorException $e){
+        return false; // TODO: differentiate between null (no results) and false/error
+    }
 }
 
 //==============================================================================
@@ -75,23 +85,6 @@ function mongodbFind($collection, $query, $filter = array()) {  // TODO: private
 } // TODO: query -> criteria
 
 //==============================================================================
-// mongodbUpdate ()
-//==============================================================================
-function mongodbUpdate($collection, $query, $update, $options = array()) {  // TODO: private
-    try {
-        $db = connectMongo();
-    } catch (MongoException $e) {
-        return false;
-    }
-
-    try {
-        return $db->$collection->update($query, $update, $options);
-    } catch (MongoCursorException $e){
-        return false; // TODO: differentiate between null (no results) and false/error
-    }
-}
-
-//==============================================================================
 // ensureGeoSpatialIndexExistsInDB ()
 //==============================================================================
 function ensureGeoSpatialIndexForPoisInDB() {
@@ -104,6 +97,13 @@ function ensureGeoSpatialIndexForPoisInDB() {
     $collection = Config::pois_col;
     $db->$collection->ensureIndex(array('location' => '2dsphere'));
     return true;
+}
+
+//==============================================================================
+// insertPoiIntoDB ()
+//==============================================================================
+function insertPoiIntoDB($doc) {
+    return mongodbInsert(Config::pois_col, $doc);
 }
 
 //==============================================================================
