@@ -39,6 +39,8 @@ function addPoi($request, $response, $args) {
             'type' => 'Point',
         ),
         'name' => $name,
+        'tags' => array(),
+        'ratings' => array(),
     );
 
     // Insert document into database
@@ -70,40 +72,13 @@ function getPoisByLoc($request, $response, $args) {
     $latitude = (double)$params['latitude'];
     $max_distance = (double)$params['max_distance'];  // should be passed in meters
 
-    // Construct query
-    // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
-    $query = array(
-        'location' => array(
-            '$near' => array(
-                '$geometry' => array(
-                    'type' => 'Point',
-                    'coordinates' => array($longitude, $latitude),
-                ),
-                '$maxDistance' => $max_distance,
-            ),
-        ),
-    );
-
     // Get all pois that satisfy query and construct json to be returned
-    if (($cursor = getPoisFromDB($query))) {
-        $result_pois = array();
-        foreach ($cursor as $poi) {
-            $oid = (String)$poi['_id'];
-            $longitude = $poi['location']['coordinates'][0];
-            $latitude = $poi['location']['coordinates'][1];
-            $name = $poi['name'];
-            $result_pois[$oid] = array(
-                "oid" => $oid,
-                "latitude" => $latitude,
-                "longitude" => $longitude,
-                "name" => $name,
-            );
-        }
+    if (($result_pois = getPoisFromDB($longitude, $latitude, $max_distance)) != false) {
         $data = json_encode($result_pois, JSON_FORCE_OBJECT);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($data);
     } else  {
-        $response->getBody()->write("Error: could not insert document into db");
+        $response->getBody()->write("Error: could not retrieve documents from db");
         return $response;
     }
 

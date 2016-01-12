@@ -109,8 +109,46 @@ function insertPoiIntoDB($doc) {
 //==============================================================================
 // getPoisFromDB ()
 //==============================================================================
-function getPoisFromDB($query) {
+function getPoisFromDB($longitude, $latitude, $max_distance) {
+    // Construct query
+    // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
+    $query = array(
+        'location' => array(
+            '$near' => array(
+                '$geometry' => array(
+                    'type' => 'Point',
+                    'coordinates' => array($longitude, $latitude),
+                ),
+                '$maxDistance' => $max_distance,
+            ),
+        ),
+    );
+
     $collection = Config::pois_col;
     ensureGeoSpatialIndexForPoisInDB();
-    return mongodbFind($collection, $query);
+    try {
+        $cursor = mongodbFind($collection, $query);
+    } catch (MongoException $e) {
+        return false;  // TODO: Better handling of error
+    }
+
+    $result_pois = array();
+    foreach ($cursor as $poi) {
+        $oid = (string)$poi['_id'];
+        $longitude = $poi['location']['coordinates'][0];
+        $latitude = $poi['location']['coordinates'][1];
+        $name = $poi['name'];
+        $tags = $poi['tags'];
+        $ratings = $poi['ratings'];
+        $result_pois[$oid] = array(
+            "oid" => $oid,
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "name" => $name,
+            "tags" => $tags,
+            "ratings" => $ratings,
+        );
+    }
+
+    return $result_pois;
 }
