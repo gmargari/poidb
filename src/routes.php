@@ -11,6 +11,8 @@ $app->post('/poi', 'addPoi');
 $app->get('/poi/getByLoc', 'getPoisByLoc');
 $app->post('/tag', 'addTag');
 $app->post('/rating', 'addRating');
+$app->post('/comment', 'addComment');
+$app->get('/comment', 'getComments');
 
 require __DIR__ . '/../src/mongodb.php';
 require __DIR__ . '/../src/util.php';
@@ -126,6 +128,62 @@ function addRating($request, $response, $args) {
         $response->getBody()->write('Rating added');
     } else  {
         $response->getBody()->write('Error: could not insert rating into db');
+    }
+    return $response;
+};
+
+//==============================================================================
+// addComment ()
+//==============================================================================
+function addComment($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid', 'userId', 'text', 'time');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+    $userId = (string)$params['userId'];
+    $text = (string)$params['text'];
+    $time = (string)$params['time'];
+
+    // Insert comment into database
+    if (addCommentToDB($oid, $userId, $text, $time)) {
+        $response->getBody()->write('Comment added');
+    } else  {
+        $response->getBody()->write('Error: could not insert comment into db');
+    }
+    return $response;
+};
+
+//==============================================================================
+// getComments ()
+//==============================================================================
+function getComments($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+
+    // Get comments from database
+    $result = array();
+    if (getCommentsFromDB($oid, $result)) {
+        $result_json = json_encode($result);
+        $response = $response->withHeader('Content-type', 'application/json');
+        $response->getBody()->write($result_json);
+    } else  {
+        $response->getBody()->write('Error: could not retrieve comments from db');
     }
     return $response;
 };

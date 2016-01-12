@@ -7,6 +7,7 @@ Class Config {
     const mongo_user = 'poiuser';
     const mongo_pass = 'poipass';
     const pois_col  = 'pois';
+    const comments_col = 'comments';
 };
 
 //==============================================================================
@@ -254,4 +255,59 @@ function addRatingToDB($oid, $name, $rating) {
 
     array_push($doc['ratings'], array( "name" => $name, "rating" => $rating));
     return mongodbUpdate($collection, $query, $doc);
+}
+
+//==============================================================================
+// addCommentToDB ()
+//==============================================================================
+function addCommentToDB($oid, $userId, $text, $time) {
+    $collection = Config::pois_col;
+    $query = array('_id' => new MongoId($oid));
+    $filter = array();
+
+    // Check if oid exists in pois collection
+    if (!mongodbFindOne($collection, $query, $filter, $doc)) {
+        return false;
+    } else if ($doc == NULL) {
+        echo $oid . ' was not found in datase';
+        return false;
+    }
+
+    // Construct document to be inserted
+    $doc = array(
+        'oid' => $oid,
+        'userId' => $userId,
+        'text' => $text,
+        'time' => $time,
+    );
+    $collection = Config::comments_col;
+    return mongodbInsert($collection, $doc);
+}
+
+//==============================================================================
+// getCommentsFromDB ()
+//==============================================================================
+function getCommentsFromDB($oid, &$result) {
+    $query = array(
+        'oid' => $oid,
+    );
+
+    $collection = Config::comments_col;
+    $filter = array();
+    ensureIndexExistsInDB($collection, 'oid');
+    if (!mongodbFind($collection, $query, $filter, $cursor)) {
+        echo $oid . ' was not found in datase';
+        return false;
+    }
+
+    $result = array();
+    foreach ($cursor as $doc) {
+        $result[] = array(
+            'userId' => $doc['userId'],
+            'text' => $doc['text'],
+            'time' => $doc['time'],
+        );
+    }
+
+    return true;
 }
