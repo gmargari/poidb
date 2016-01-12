@@ -195,24 +195,17 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
     }
 
     $result = array();
-    foreach ($cursor as $poi) {
-        $oid = (string)$poi['_id'];
-        $longitude = $poi['location']['coordinates'][0];
-        $latitude = $poi['location']['coordinates'][1];
-        $name = $poi['name'];
-        $tags = $poi['tag'];
-        $ratings = $poi['ratings'];
-        $userid = $poi['userId'];
-        $url = $poi['url'];
+    foreach ($cursor as $doc) {
+        $oid = (string)$doc['_id'];
         $result[$oid] = array(  // TODO: $result[] =
             'oid' => $oid,
-            'latitude' => (string)$latitude,
-            'longitude' => (string)$longitude,
-            'name' => $name,
-            'tag' => $tags,
-            'ratings' => $ratings,
-            'userId' => $userid,
-            'url' => $url,
+            'longitude' => (string)$doc['location']['coordinates'][0],
+            'latitude' => (string)$doc['location']['coordinates'][1],
+            'name' => $doc['name'],
+            'tag' => $doc['tag'],
+            'ratings' => $doc['ratings'],
+            'userId' => $doc['userId'],
+            'url' => $doc['url'],
         );
     }
 
