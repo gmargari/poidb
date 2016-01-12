@@ -61,7 +61,8 @@ function mongodbUpdate($collection, $query, $update, $options = array()) {  // T
     }
 
     try {
-        return $db->$collection->update($query, $update, $options);
+        $db->$collection->update($query, $update, $options);
+        return true;
     } catch (MongoCursorException $e){
         return false; // TODO: differentiate between null (no results) and false/error
     }
@@ -70,7 +71,7 @@ function mongodbUpdate($collection, $query, $update, $options = array()) {  // T
 //==============================================================================
 // mongodbFind ()
 //==============================================================================
-function mongodbFind($collection, $query, $filter = array()) {  // TODO: private
+function mongodbFind($collection, $query, $filter, &$cursor) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
@@ -78,7 +79,8 @@ function mongodbFind($collection, $query, $filter = array()) {  // TODO: private
     }
 
     try {
-        return $db->$collection->find($query, $filter)->limit(0);
+        $cursor = $db->$collection->find($query, $filter)->limit(0);
+        return true;
     } catch (MongoCursorException $e){
         return false; // TODO: differentiate between null (no results) and false/error
     }
@@ -138,10 +140,8 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
 
     $collection = Config::pois_col;
     ensureGeoSpatialIndexForPoisInDB();
-    try {
-        $cursor = mongodbFind($collection, $query);
-    } catch (MongoException $e) {
-        return false;  // TODO: Better handling of error
+    if (!mongodbFind($collection, $query, array(), $cursor)) {
+        return false;
     }
 
     $result_pois = array();
