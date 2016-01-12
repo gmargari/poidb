@@ -52,7 +52,7 @@ function insertPoiIntoDB($doc) {
 //==============================================================================
 // mongodbFind ()
 //==============================================================================
-function mongodbFind($collection, $query) {  // TODO: private
+function mongodbFind($collection, $query, $filter = array()) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
@@ -60,7 +60,24 @@ function mongodbFind($collection, $query) {  // TODO: private
     }
 
     try {
-        return $db->$collection->find($query)->limit(0);
+        return $db->$collection->find($query, $filter)->limit(0);
+    } catch (MongoCursorException $e){
+        return false; // TODO: differentiate between null (no results) and false/error
+    }
+} // TODO: query -> criteria
+
+//==============================================================================
+// mongodbUpdate ()
+//==============================================================================
+function mongodbUpdate($collection, $query, $update, $options = array()) {  // TODO: private
+    try {
+        $db = connectMongo();
+    } catch (MongoException $e) {
+        return false;
+    }
+
+    try {
+        return $db->$collection->update($query, $update, $options);
     } catch (MongoCursorException $e){
         return false; // TODO: differentiate between null (no results) and false/error
     }
