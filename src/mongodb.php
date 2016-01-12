@@ -196,3 +196,21 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
 
     return true;
 }
+
+//==============================================================================
+// addTagToDB ()
+//==============================================================================
+function addTagToDB($oid, $tag) {
+    $collection = Config::pois_col;
+    $query = array('_id' => new MongoId($oid));
+    $filter = array();
+
+    if (!mongodbFindOne($collection, $query, $filter, $doc)) {
+        echo $oid . ' was not found in datase';
+        return false;
+    }
+
+    array_push($doc['tags'], $tag);
+    return mongodbUpdate($collection, $query, $doc);
+//    return mongodbUpdate($collection, $query, array('$push' => array('tags', $tag)); // exception: Invalid modifier specified: $push
+}

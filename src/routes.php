@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 //==============================================================================
 $app->post('/poi', 'addPoi');
 $app->get('/poi/getByLoc', 'getPoisByLoc');
+$app->post('/tag', 'addTag');
 
 require __DIR__ . '/../src/mongodb.php';
 require __DIR__ . '/../src/util.php';
@@ -69,6 +70,34 @@ function getPoisByLoc($request, $response, $args) {
         $response->getBody()->write($data);
     } else  {
         $response->getBody()->write('Error: could not retrieve documents from db');
+        return $response;
+    }
+
+    return $response;
+};
+
+//==============================================================================
+// addTag ()
+//==============================================================================
+function addTag($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid', 'tag');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+    $tag = (string)$params['tag'];
+
+    // Insert tag into database
+    if (addTagToDB($oid, $tag)) {
+        $response->getBody()->write('Tag added');
+    } else  {
+        $response->getBody()->write('Error: could not insert tag to db');
         return $response;
     }
 
