@@ -32,19 +32,8 @@ function addPoi($request, $response, $args) {
     $latitude = (double)$params['latitude'];
     $name = $params['name'];
 
-    // Construct document to be inserted
-    $doc = array(
-        'location' => array(
-            'coordinates' => array( $longitude, $latitude ),
-            'type' => 'Point',
-        ),
-        'name' => $name,
-        'tags' => array(),
-        'ratings' => array(),
-    );
-
     // Insert document into database
-    if (insertPoiIntoDB($doc)) {
+    if (insertPoiIntoDB($longitude, $latitude, $name)) {
         $response->getBody()->write("POI added");
     } else  {
         $response->getBody()->write("Error: could not insert document into db");
