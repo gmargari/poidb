@@ -8,6 +8,7 @@ Class Config {
     const mongo_pass = 'poipass';
     const pois_col  = 'pois';
     const comments_col = 'comments';
+    const photos_col = 'photos';
 };
 
 //==============================================================================
@@ -306,6 +307,59 @@ function getCommentsFromDB($oid, &$result) {
             'userId' => $doc['userId'],
             'text' => $doc['text'],
             'time' => $doc['time'],
+        );
+    }
+
+    return true;
+}
+
+//==============================================================================
+// addPhotoToDB ()
+//==============================================================================
+function addPhotoToDB($oid, $userId, $src) {
+    $collection = Config::pois_col;
+    $query = array('_id' => new MongoId($oid));
+    $filter = array();
+
+    // Check if oid exists in pois collection
+    if (!mongodbFindOne($collection, $query, $filter, $doc)) {
+        return false;
+    } else if ($doc == NULL) {
+        echo $oid . ' was not found in datase';
+        return false;
+    }
+
+    // Construct document to be inserted
+    $doc = array(
+        'oid' => $oid,
+        'userId' => $userId,
+        'src' => $src
+    );
+    $collection = Config::photos_col;
+    return mongodbInsert($collection, $doc);
+}
+
+//==============================================================================
+// getPhotosFromDB ()
+//==============================================================================
+function getPhotosFromDB($oid, &$result) {
+    $query = array(
+        'oid' => $oid,
+    );
+
+    $collection = Config::photos_col;
+    $filter = array();
+    ensureIndexExistsInDB($collection, 'oid');
+    if (!mongodbFind($collection, $query, $filter, $cursor)) {
+        echo $oid . ' was not found in datase';
+        return false;
+    }
+
+    $result = array();
+    foreach ($cursor as $doc) {
+        $result[] = array(
+            'userId' => $doc['userId'],
+            'src' => $doc['src'],
         );
     }
 

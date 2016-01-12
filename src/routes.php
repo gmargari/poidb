@@ -13,6 +13,8 @@ $app->post('/tag', 'addTag');
 $app->post('/rating', 'addRating');
 $app->post('/comment', 'addComment');
 $app->get('/comment', 'getComments');
+$app->post('/photo', 'addPhoto');
+$app->get('/photo', 'getPhotos');
 
 require __DIR__ . '/../src/mongodb.php';
 require __DIR__ . '/../src/util.php';
@@ -179,6 +181,61 @@ function getComments($request, $response, $args) {
     // Get comments from database
     $result = array();
     if (getCommentsFromDB($oid, $result)) {
+        $result_json = json_encode($result);
+        $response = $response->withHeader('Content-type', 'application/json');
+        $response->getBody()->write($result_json);
+    } else  {
+        $response->getBody()->write('Error: could not retrieve comments from db');
+    }
+    return $response;
+};
+
+//==============================================================================
+// addPhoto ()
+//==============================================================================
+function addPhoto($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid', 'userId', 'src');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+    $userId = (string)$params['userId'];
+    $src = (string)$params['src'];
+
+    // Insert photo into database
+    if (addPhotoToDB($oid, $userId, $src)) {
+        $response->getBody()->write('Photo added');
+    } else  {
+        $response->getBody()->write('Error: could not insert photo into db');
+    }
+    return $response;
+};
+
+//==============================================================================
+// getPhotos ()
+//==============================================================================
+function getPhotos($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+
+    // Get photos from database
+    $result = array();
+    if (getPhotosFromDB($oid, $result)) {
         $result_json = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($result_json);
