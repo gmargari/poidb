@@ -72,12 +72,12 @@ function getPoisByLoc($request, $response, $args) {
 
     // Construct query
     // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
-    $query = Array(
-        'location' => Array(
-            '$near' => Array(
-                '$geometry' => Array(
+    $query = array(
+        'location' => array(
+            '$near' => array(
+                '$geometry' => array(
                     'type' => 'Point',
-                    'coordinates' => Array($longitude, $latitude),
+                    'coordinates' => array($longitude, $latitude),
                 ),
                 '$maxDistance' => $max_distance,
             ),

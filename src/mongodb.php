@@ -9,10 +9,12 @@ Class Config {
     const pois_col  = "pois";
 };
 
+// TODO: Make class
+
 //==============================================================================
 // connectMongo ()
 //==============================================================================
-function connectMongo() {
+function connectMongo() {  // TODO: private
     try {
         $host = Config::mongo_host;
         $dbname = Config::mongo_dbname;
