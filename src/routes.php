@@ -22,7 +22,7 @@ function addPoi($request, $response, $args) {
     $params = $request->getParams();
 
     // Check all required parameters are defined
-    $required = array('longitude', 'latitude', 'name');
+    $required = array('longitude', 'latitude', 'name', 'userId', 'tag', 'url');
     if (!allParamsDefined($required, $params)) {
         // TODO: better handling of errors
         $response->getBody()->write('Error: not all required parameters are defined');
@@ -33,9 +33,12 @@ function addPoi($request, $response, $args) {
     $longitude = (double)$params['longitude'];
     $latitude = (double)$params['latitude'];
     $name = $params['name'];
+    $url = $params['url'];
+    $userid = $params['userId'];
+    $tags = $params['tag'];
 
     // Insert document into database
-    if (insertPoiIntoDB($longitude, $latitude, $name)) {
+    if (insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags)) {
         $response->getBody()->write('POI added');
     } else  {
         $response->getBody()->write('Error: could not insert document into db');

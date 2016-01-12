@@ -135,7 +135,7 @@ function ensureGeoSpatialIndexForPoisInDB() {
 //==============================================================================
 // insertPoiIntoDB ()
 //==============================================================================
-function insertPoiIntoDB($longitude, $latitude, $name) {
+function insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags) {
 
     // Construct document to be inserted
     $doc = array(
@@ -144,8 +144,10 @@ function insertPoiIntoDB($longitude, $latitude, $name) {
             'type' => 'Point',
         ),
         'name' => $name,
-        'tag' => array(),
+        'tag' => $tags,
         'ratings' => array(),
+        'userId' => $userid,
+        'url' => $url,
     );
     $collection = Config::pois_col;
     return mongodbInsert($collection, $doc);
