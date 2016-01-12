@@ -3,6 +3,9 @@ import json
 import sys
 import os
 
+# To import sample POIs:
+# ./transform_json_for_mongoimport.py sample_POIs.json | mongoimport --db poidb --collection pois
+
 if (len(sys.argv) != 2):
     print "Syntax: " + sys.argv[0] + " <sample_json_file>"
     sys.exit(1)
