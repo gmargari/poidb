@@ -62,7 +62,8 @@ function getPoisByLoc($request, $response, $args) {
     $max_distance = (double)$params['max_distance'];  // should be passed in meters
 
     // Get all pois that satisfy query and construct json to be returned
-    if (($result_pois = getPoisFromDB($longitude, $latitude, $max_distance)) != false) {
+    $result_pois = array();
+    if (getPoisFromDB($longitude, $latitude, $max_distance, $result_pois)) {
         $data = json_encode($result_pois, JSON_FORCE_OBJECT);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($data);

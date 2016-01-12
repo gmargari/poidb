@@ -121,7 +121,7 @@ function insertPoiIntoDB($longitude, $latitude, $name) {
 //==============================================================================
 // getPoisFromDB ()
 //==============================================================================
-function getPoisFromDB($longitude, $latitude, $max_distance) {
+function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
     // Construct query
     // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
     $query = array(
@@ -162,5 +162,5 @@ function getPoisFromDB($longitude, $latitude, $max_distance) {
         );
     }
 
-    return $result_pois;
+    return true;
 }
