@@ -2,11 +2,11 @@
 
 // TODO: Move in separate file
 Class Config {
-    const mongo_host = "localhost:27017";
-    const mongo_dbname = "poidb";
-    const mongo_user = "poiuser";
-    const mongo_pass = "poipass";
-    const pois_col  = "pois";
+    const mongo_host = 'localhost:27017';
+    const mongo_dbname = 'poidb';
+    const mongo_user = 'poiuser';
+    const mongo_pass = 'poipass';
+    const pois_col  = 'pois';
 };
 
 //==============================================================================
@@ -171,7 +171,8 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
 
     $collection = Config::pois_col;
     ensureGeoSpatialIndexForPoisInDB();
-    if (!mongodbFind($collection, $query, array(), $cursor)) {
+    $filter = array();
+    if (!mongodbFind($collection, $query, $filter, $cursor)) {
         return false;
     }
 
@@ -184,12 +185,12 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
         $tags = $poi['tags'];
         $ratings = $poi['ratings'];
         $result_pois[$oid] = array(
-            "oid" => $oid,
-            "latitude" => $latitude,
-            "longitude" => $longitude,
-            "name" => $name,
-            "tags" => $tags,
-            "ratings" => $ratings,
+            'oid' => $oid,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'name' => $name,
+            'tags' => $tags,
+            'ratings' => $ratings,
         );
     }
 

@@ -23,7 +23,7 @@ function addPoi($request, $response, $args) {
     $required = array('longitude', 'latitude', 'name');
     if (!allParamsDefined($required, $params)) {
         // TODO: better handling of errors
-        $response->getBody()->write("Error: not all required parameters are defined");
+        $response->getBody()->write('Error: not all required parameters are defined');
         return $response;
     }
 
@@ -34,9 +34,9 @@ function addPoi($request, $response, $args) {
 
     // Insert document into database
     if (insertPoiIntoDB($longitude, $latitude, $name)) {
-        $response->getBody()->write("POI added");
+        $response->getBody()->write('POI added');
     } else  {
-        $response->getBody()->write("Error: could not insert document into db");
+        $response->getBody()->write('Error: could not insert document into db');
         return $response;
     }
 
@@ -52,7 +52,7 @@ function getPoisByLoc($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('longitude', 'latitude', 'max_distance');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write("Error: not all required parameters are defined");
+        $response->getBody()->write('Error: not all required parameters are defined');
         return $response;
     }
 
@@ -68,7 +68,7 @@ function getPoisByLoc($request, $response, $args) {
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($data);
     } else  {
-        $response->getBody()->write("Error: could not retrieve documents from db");
+        $response->getBody()->write('Error: could not retrieve documents from db');
         return $response;
     }
 
