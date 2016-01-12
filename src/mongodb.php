@@ -98,6 +98,25 @@ function mongodbFind($collection, $query, $filter, &$cursor) {  // TODO: private
 } // TODO: query -> criteria
 
 //==============================================================================
+// mongodbFindOne ()
+//==============================================================================
+function mongodbFindOne($collection, $query, $filter, &$doc) {  // TODO: private
+    try {
+        $db = connectMongo();
+    } catch (MongoException $e) {
+        return false;
+    }
+
+    try {
+        $doc = $db->$collection->findOne($query, $filter);
+        return true;
+    } catch (MongoCursorException $e){
+        handleException($e);
+        return false;
+    }
+}
+
+//==============================================================================
 // ensureGeoSpatialIndexExistsInDB ()
 //==============================================================================
 function ensureGeoSpatialIndexForPoisInDB() {
