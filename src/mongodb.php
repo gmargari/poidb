@@ -149,7 +149,7 @@ function ensureIndexExistsInDB($collection, $field) {
 //==============================================================================
 // insertPoiIntoDB ()
 //==============================================================================
-function insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags) {
+function insertPoiIntoDB($longitude, $latitude, $name, $url, $userId, $tags) {
 
     // Construct document to be inserted
     $doc = array(
@@ -160,7 +160,7 @@ function insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags) {
         'name' => $name,
         'tag' => $tags,
         'ratings' => array(),
-        'userId' => $userid,
+        'userId' => $userId,
         'url' => $url,
     );
     $collection = Config::pois_col;
@@ -170,7 +170,7 @@ function insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags) {
 //==============================================================================
 // getPoisFromDB ()
 //==============================================================================
-function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
+function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
     // Construct query
     // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
     $query = array(
@@ -192,7 +192,7 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
         return false;
     }
 
-    $result_pois = array();
+    $result = array();
     foreach ($cursor as $poi) {
         $oid = (string)$poi['_id'];
         $longitude = $poi['location']['coordinates'][0];
@@ -202,7 +202,7 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
         $ratings = $poi['ratings'];
         $userid = $poi['userId'];
         $url = $poi['url'];
-        $result_pois[$oid] = array(
+        $result[$oid] = array(  // TODO: $result[] =
             'oid' => $oid,
             'latitude' => (string)$latitude,
             'longitude' => (string)$longitude,
@@ -252,7 +252,6 @@ function addRatingToDB($oid, $name, $rating) {
         return false;
     }
 
-    $new_rating = array( "name" => $name, "rating" => $rating);
-    array_push($doc['ratings'], $new_rating);
+    array_push($doc['ratings'], array( "name" => $name, "rating" => $rating));
     return mongodbUpdate($collection, $query, $doc);
 }

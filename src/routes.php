@@ -26,6 +26,7 @@ function addPoi($request, $response, $args) {
     if (!allParamsDefined($required, $params)) {
         // TODO: better handling of errors
         $response->getBody()->write('Error: not all required parameters are defined');
+        // TODO: return proper response code
         return $response;
     }
 
@@ -34,17 +35,15 @@ function addPoi($request, $response, $args) {
     $latitude = (double)$params['latitude'];
     $name = $params['name'];
     $url = $params['url'];
-    $userid = $params['userId'];
+    $userId = $params['userId'];
     $tags = $params['tag'];
 
     // Insert document into database
-    if (insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags)) {
+    if (insertPoiIntoDB($longitude, $latitude, $name, $url, $userId, $tags)) {
         $response->getBody()->write('POI added');
     } else  {
-        $response->getBody()->write('Error: could not insert document into db');
-        return $response;
+        $response->getBody()->write('Error: could not insert POI into db');
     }
-
     return $response;
 };
 
@@ -67,16 +66,14 @@ function getPoisByLoc($request, $response, $args) {
     $max_distance = (double)$params['max_distance'] * 1000;  // from km -> meters
 
     // Get all pois that satisfy query and construct json to be returned
-    $result_pois = array();
-    if (getPoisFromDB($longitude, $latitude, $max_distance, $result_pois)) {
-        $data = json_encode($result_pois);
+    $result = array();
+    if (getPoisFromDB($longitude, $latitude, $max_distance, $result)) {
+        $result_json = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
-        $response->getBody()->write($data);
+        $response->getBody()->write($result_json);
     } else  {
-        $response->getBody()->write('Error: could not retrieve documents from db');
-        return $response;
+        $response->getBody()->write('Error: could not retrieve POIs from db');
     }
-
     return $response;
 };
 
@@ -101,10 +98,8 @@ function addTag($request, $response, $args) {
     if (addTagToDB($oid, $tag)) {
         $response->getBody()->write('Tag added');
     } else  {
-        $response->getBody()->write('Error: could not insert tag to db');
-        return $response;
+        $response->getBody()->write('Error: could not insert tag into db');
     }
-
     return $response;
 };
 
@@ -130,9 +125,7 @@ function addRating($request, $response, $args) {
     if (addRatingToDB($oid, $name, $rating)) {
         $response->getBody()->write('Rating added');
     } else  {
-        $response->getBody()->write('Error: could not insert rating to db');
-        return $response;
+        $response->getBody()->write('Error: could not insert rating into db');
     }
-
     return $response;
 };
