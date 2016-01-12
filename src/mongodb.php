@@ -133,6 +133,21 @@ function ensureGeoSpatialIndexForPoisInDB() {
 }
 
 //==============================================================================
+// ensureIndexExistsInDB ()
+//==============================================================================
+function ensureIndexExistsInDB($collection, $field) {
+    try {
+        $db = connectMongo();
+    } catch (MongoException $e) {
+        handleException($e);
+        return false;
+    }
+
+    $db->$collection->ensureIndex(array($field => 1));
+    return true;
+}
+
+//==============================================================================
 // insertPoiIntoDB ()
 //==============================================================================
 function insertPoiIntoDB($longitude, $latitude, $name, $url, $userid, $tags) {
