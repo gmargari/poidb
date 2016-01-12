@@ -144,7 +144,7 @@ function insertPoiIntoDB($longitude, $latitude, $name) {
             'type' => 'Point',
         ),
         'name' => $name,
-        'tags' => array(),
+        'tag' => array(),
         'ratings' => array(),
     );
     $collection = Config::pois_col;
@@ -182,14 +182,14 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result_pois) {
         $longitude = $poi['location']['coordinates'][0];
         $latitude = $poi['location']['coordinates'][1];
         $name = $poi['name'];
-        $tags = $poi['tags'];
+        $tags = $poi['tag'];
         $ratings = $poi['ratings'];
         $result_pois[$oid] = array(
             'oid' => $oid,
             'latitude' => $latitude,
             'longitude' => $longitude,
             'name' => $name,
-            'tags' => $tags,
+            'tag' => $tags,
             'ratings' => $ratings,
         );
     }
@@ -210,7 +210,7 @@ function addTagToDB($oid, $tag) {
         return false;
     }
 
-    array_push($doc['tags'], $tag);
+    array_push($doc['tag'], $tag);
     return mongodbUpdate($collection, $query, $doc);
 //    return mongodbUpdate($collection, $query, array('$push' => array('tags', $tag)); // exception: Invalid modifier specified: $push
 }
