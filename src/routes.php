@@ -28,9 +28,8 @@ function addPoi($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('longitude', 'latitude', 'name', 'userId', 'tag', 'url');
     if (!allParamsDefined($required, $params)) {
-        // TODO: better handling of errors
+        // TODO: better handling of errors, return proper response code
         $response->getBody()->write('Error: not all required parameters are defined');
-        // TODO: return proper response code
         return $response;
     }
 
@@ -42,11 +41,11 @@ function addPoi($request, $response, $args) {
     $userId = $params['userId'];
     $tags = $params['tag'];
 
-    // Insert document into database
-    if (insertPoiIntoDB($longitude, $latitude, $name, $url, $userId, $tags)) {
-        $response->getBody()->write('POI added');
+    // Insert into database
+    if (addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags)) {
+        $response->getBody()->write('Ok');
     } else  {
-        $response->getBody()->write('Error: could not insert POI into db');
+        $response->getBody()->write('Error: could not insert into db');
     }
     return $response;
 };
@@ -69,14 +68,14 @@ function getPoisByLoc($request, $response, $args) {
     $latitude = (double)$params['latitude'];
     $max_distance = (double)$params['max_distance'] * 1000;  // from km -> meters
 
-    // Get all pois that satisfy query and construct json to be returned
+    // Retrieve from database
     $result = array();
     if (getPoisFromDB($longitude, $latitude, $max_distance, $result)) {
         $result_json = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($result_json);
     } else  {
-        $response->getBody()->write('Error: could not retrieve POIs from db');
+        $response->getBody()->write('Error: could not retrieve from db');
     }
     return $response;
 };
@@ -98,11 +97,11 @@ function addTag($request, $response, $args) {
     $oid = (string)$params['oid'];
     $tag = (string)$params['tag'];
 
-    // Insert tag into database
+    // Insert into database
     if (addTagToDB($oid, $tag)) {
-        $response->getBody()->write('Tag added');
+        $response->getBody()->write('Ok');
     } else  {
-        $response->getBody()->write('Error: could not insert tag into db');
+        $response->getBody()->write('Error: could not insert into db');
     }
     return $response;
 };
@@ -125,11 +124,11 @@ function addRating($request, $response, $args) {
     $name = (string)$params['name'];
     $rating = (string)$params['rating'];
 
-    // Insert rating into database
+    // Insert into database
     if (addRatingToDB($oid, $name, $rating)) {
-        $response->getBody()->write('Rating added');
+        $response->getBody()->write('Ok');
     } else  {
-        $response->getBody()->write('Error: could not insert rating into db');
+        $response->getBody()->write('Error: could not insert into db');
     }
     return $response;
 };
@@ -153,11 +152,11 @@ function addComment($request, $response, $args) {
     $text = (string)$params['text'];
     $time = (string)$params['time'];
 
-    // Insert comment into database
+    // Insert into database
     if (addCommentToDB($oid, $userId, $text, $time)) {
-        $response->getBody()->write('Comment added');
+        $response->getBody()->write('Ok');
     } else  {
-        $response->getBody()->write('Error: could not insert comment into db');
+        $response->getBody()->write('Error: could not insert into db');
     }
     return $response;
 };
@@ -178,14 +177,14 @@ function getComments($request, $response, $args) {
     // Get parameters
     $oid = (string)$params['oid'];
 
-    // Get comments from database
+    // Retrieve from database
     $result = array();
     if (getCommentsFromDB($oid, $result)) {
         $result_json = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($result_json);
     } else  {
-        $response->getBody()->write('Error: could not retrieve comments from db');
+        $response->getBody()->write('Error: could not retrieve from db');
     }
     return $response;
 };
@@ -208,11 +207,11 @@ function addPhoto($request, $response, $args) {
     $userId = (string)$params['userId'];
     $src = (string)$params['src'];
 
-    // Insert photo into database
+    // Insert into database
     if (addPhotoToDB($oid, $userId, $src)) {
-        $response->getBody()->write('Photo added');
+        $response->getBody()->write('Ok');
     } else  {
-        $response->getBody()->write('Error: could not insert photo into db');
+        $response->getBody()->write('Error: could not insert into db');
     }
     return $response;
 };
@@ -233,14 +232,14 @@ function getPhotos($request, $response, $args) {
     // Get parameters
     $oid = (string)$params['oid'];
 
-    // Get photos from database
+    // Retrieve from database
     $result = array();
     if (getPhotosFromDB($oid, $result)) {
         $result_json = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
         $response->getBody()->write($result_json);
     } else  {
-        $response->getBody()->write('Error: could not retrieve comments from db');
+        $response->getBody()->write('Error: could not retrieve from db');
     }
     return $response;
 };

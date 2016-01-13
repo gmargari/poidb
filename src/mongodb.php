@@ -37,7 +37,6 @@ function connectMongo() {  // TODO: private
         $db = $client->$dbname;
         return $db;
     } catch (MongoException $e) {
-        echo $e;
         throw $e;
     }
 }
@@ -49,6 +48,7 @@ function mongodbInsert($collection, $doc) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
+        handleException($e);
         return false;
     }
 
@@ -68,6 +68,7 @@ function mongodbUpdate($collection, $query, $update, $options = array()) {  // T
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
+        handleException($e);
         return false;
     }
 
@@ -87,6 +88,7 @@ function mongodbFind($collection, $query, $filter, &$cursor) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
+        handleException($e);
         return false;
     }
 
@@ -106,6 +108,7 @@ function mongodbFindOne($collection, $query, $filter, &$doc) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
+        handleException($e);
         return false;
     }
 
@@ -149,9 +152,9 @@ function ensureIndexExistsInDB($collection, $field) {
 }
 
 //==============================================================================
-// insertPoiIntoDB ()
+// addPoiToDB ()
 //==============================================================================
-function insertPoiIntoDB($longitude, $latitude, $name, $url, $userId, $tags) {
+function addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags) {
 
     // Construct document to be inserted
     $doc = array(
