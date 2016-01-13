@@ -28,9 +28,7 @@ function addPoi($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('longitude', 'latitude', 'name', 'userId', 'tag', 'url');
     if (!allParamsDefined($required, $params)) {
-        // TODO: better handling of errors, return proper response code
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -43,11 +41,10 @@ function addPoi($request, $response, $args) {
 
     // Insert into database
     if (addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags)) {
-        $response->getBody()->write('Ok');
+        return responseWithCodeMessage($response, 200, "OK");
     } else  {
-        $response->getBody()->write('Error: could not insert into db');
+        return responseWithCodeMessage($response, 500, 'Could not insert into db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -59,8 +56,7 @@ function addTag($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('oid', 'tag');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -69,11 +65,10 @@ function addTag($request, $response, $args) {
 
     // Insert into database
     if (addTagToDB($oid, $tag)) {
-        $response->getBody()->write('Ok');
+        return responseWithCodeMessage($response, 200, "OK");
     } else  {
-        $response->getBody()->write('Error: could not insert into db');
+        return responseWithCodeMessage($response, 500, 'Could not insert into db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -85,8 +80,7 @@ function addRating($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('oid', 'rating', 'name');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -96,11 +90,10 @@ function addRating($request, $response, $args) {
 
     // Insert into database
     if (addRatingToDB($oid, $name, $rating)) {
-        $response->getBody()->write('Ok');
+        return responseWithCodeMessage($response, 200, "OK");
     } else  {
-        $response->getBody()->write('Error: could not insert into db');
+        return responseWithCodeMessage($response, 500, 'Could not insert into db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -112,8 +105,7 @@ function addComment($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('oid', 'userId', 'text', 'time');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -124,11 +116,10 @@ function addComment($request, $response, $args) {
 
     // Insert into database
     if (addCommentToDB($oid, $userId, $text, $time)) {
-        $response->getBody()->write('Ok');
+        return responseWithCodeMessage($response, 200, "OK");
     } else  {
-        $response->getBody()->write('Error: could not insert into db');
+        return responseWithCodeMessage($response, 500, 'Could not insert into db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -140,8 +131,7 @@ function addPhoto($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('oid', 'userId', 'src');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -151,11 +141,10 @@ function addPhoto($request, $response, $args) {
 
     // Insert into database
     if (addPhotoToDB($oid, $userId, $src)) {
-        $response->getBody()->write('Ok');
+        return responseWithCodeMessage($response, 200, "OK");
     } else  {
-        $response->getBody()->write('Error: could not insert into db');
+        return responseWithCodeMessage($response, 500, 'Could not insert into db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -167,8 +156,7 @@ function getPoisByLoc($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('longitude', 'latitude', 'max_distance');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -179,13 +167,12 @@ function getPoisByLoc($request, $response, $args) {
     // Retrieve from database
     $result = array();
     if (getPoisFromDB($longitude, $latitude, $max_distance, $result)) {
-        $result_json = json_encode($result);
+        $result = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
-        $response->getBody()->write($result_json);
+        return responseWithCodeMessage($response, 200, $result);
     } else  {
-        $response->getBody()->write('Error: could not retrieve from db');
+        return responseWithCodeMessage($response, 500, 'Could not retrieve from db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -197,8 +184,7 @@ function getComments($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('oid');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -207,13 +193,12 @@ function getComments($request, $response, $args) {
     // Retrieve from database
     $result = array();
     if (getCommentsFromDB($oid, $result)) {
-        $result_json = json_encode($result);
+        $result = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
-        $response->getBody()->write($result_json);
+        return responseWithCodeMessage($response, 200, $result);
     } else  {
-        $response->getBody()->write('Error: could not retrieve from db');
+        return responseWithCodeMessage($response, 500, 'Could not retrieve from db');
     }
-    return $response;
 };
 
 //==============================================================================
@@ -225,8 +210,7 @@ function getPhotos($request, $response, $args) {
     // Check all required parameters are defined
     $required = array('oid');
     if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
+        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     // Get parameters
@@ -235,11 +219,10 @@ function getPhotos($request, $response, $args) {
     // Retrieve from database
     $result = array();
     if (getPhotosFromDB($oid, $result)) {
-        $result_json = json_encode($result);
+        $result = json_encode($result);
         $response = $response->withHeader('Content-type', 'application/json');
-        $response->getBody()->write($result_json);
+        return responseWithCodeMessage($response, 200, $result);
     } else  {
-        $response->getBody()->write('Error: could not retrieve from db');
+        return responseWithCodeMessage($response, 500, 'Could not retrieve from db');
     }
-    return $response;
 };
