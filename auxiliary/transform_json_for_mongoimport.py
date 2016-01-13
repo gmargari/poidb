@@ -5,6 +5,11 @@ import os
 
 # To import sample POIs:
 # ./transform_json_for_mongoimport.py sample_POIs.json | mongoimport --db poidb --collection pois
+#
+# To drop existing database:
+# mongo
+#   use poidb
+#   db.runCommand( { dropDatabase: 1 } )
 
 if (len(sys.argv) != 2):
     print "Syntax: " + sys.argv[0] + " <sample_json_file>"
