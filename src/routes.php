@@ -31,10 +31,10 @@ function addPoi($request, $response, $args) {
 
     $longitude = (double)$params['longitude'];
     $latitude = (double)$params['latitude'];
-    $name = $params['name'];
-    $url = $params['url'];
-    $userId = $params['userId'];
-    $tags = $params['tag'];
+    $name = (string)$params['name'];
+    $userId = (string)$params['userId'];
+    $tags = (string)$params['tag'];
+    $url = (string)$params['url'];
 
     if (addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags)) {
         return responseWithCodeMessage($response, 200, "OK");
