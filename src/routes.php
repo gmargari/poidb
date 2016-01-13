@@ -24,8 +24,8 @@ require __DIR__ . '/../src/util.php';
 //==============================================================================
 function addPoi($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('longitude', 'latitude', 'name', 'userId', 'tag', 'url');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('longitude', 'latitude', 'name', 'userId', 'tag', 'url');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -48,8 +48,8 @@ function addPoi($request, $response, $args) {
 //==============================================================================
 function addTag($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('oid', 'tag');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('oid', 'tag');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -68,8 +68,8 @@ function addTag($request, $response, $args) {
 //==============================================================================
 function addRating($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('oid', 'rating', 'name');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('oid', 'rating', 'name');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -89,8 +89,8 @@ function addRating($request, $response, $args) {
 //==============================================================================
 function addComment($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('oid', 'userId', 'text', 'time');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('oid', 'userId', 'text', 'time');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -111,8 +111,8 @@ function addComment($request, $response, $args) {
 //==============================================================================
 function addPhoto($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('oid', 'userId', 'src');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('oid', 'userId', 'src');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -132,8 +132,8 @@ function addPhoto($request, $response, $args) {
 //==============================================================================
 function getPoisByLoc($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('longitude', 'latitude', 'max_distance');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('longitude', 'latitude', 'max_distance');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -156,8 +156,8 @@ function getPoisByLoc($request, $response, $args) {
 //==============================================================================
 function getComments($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('oid');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('oid');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
@@ -178,8 +178,8 @@ function getComments($request, $response, $args) {
 //==============================================================================
 function getPhotos($request, $response, $args) {
     $params = $request->getParams();
-    $required = array('oid');
-    if (!allParamsDefined($required, $params)) {
+    $required_params = array('oid');
+    if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 

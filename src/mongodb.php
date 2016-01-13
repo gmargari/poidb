@@ -147,8 +147,7 @@ function ensureIndexExistsInDB($collection, $field) {  // TODO: private
 // addPoiToDB ()
 //==============================================================================
 function addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags) {
-
-    // Construct document to be inserted
+    $collection = Config::pois_col;
     $doc = array(
         'location' => array(
             'coordinates' => array( $longitude, $latitude ),
@@ -160,7 +159,6 @@ function addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags) {
         'userId' => $userId,
         'url' => $url,
     );
-    $collection = Config::pois_col;
     return mongodbInsert($collection, $doc);
 }
 
@@ -170,17 +168,15 @@ function addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags) {
 function addTagToDB($oid, $tag) {
     $collection = Config::pois_col;
     $query = array('_id' => new MongoId($oid));
-
     if (!mongodbFindOne($collection, $query, $doc)) {
         return false;
     } else if ($doc == NULL) {
-        echo $oid . ' was not found in datase';
+        echo $oid . ' was not found in database';
         return false;
     }
 
     array_push($doc['tag'], $tag);
     return mongodbUpdate($collection, $query, $doc);
-//    return mongodbUpdate($collection, $query, array('$push' => array('tags', $tag)); // exception: Invalid modifier specified: $push
 }
 
 //==============================================================================
@@ -189,14 +185,14 @@ function addTagToDB($oid, $tag) {
 function addRatingToDB($oid, $name, $rating) {
     $collection = Config::pois_col;
     $query = array('_id' => new MongoId($oid));
-
     if (!mongodbFindOne($collection, $query, $doc)) {
         return false;
     } else if ($doc == NULL) {
-        echo $oid . ' was not found in datase';
+        echo $oid . ' was not found in database';
         return false;
     }
 
+    // TODO: replace prev rating for this poi with new rating
     array_push($doc['ratings'], array( "name" => $name, "rating" => $rating));
     return mongodbUpdate($collection, $query, $doc);
 }
@@ -207,23 +203,20 @@ function addRatingToDB($oid, $name, $rating) {
 function addCommentToDB($oid, $userId, $text, $time) {
     $collection = Config::pois_col;
     $query = array('_id' => new MongoId($oid));
-
-    // Check if oid exists in pois collection
     if (!mongodbFindOne($collection, $query, $doc)) {
         return false;
     } else if ($doc == NULL) {
-        echo $oid . ' was not found in datase';
+        echo $oid . ' was not found in database';
         return false;
     }
 
-    // Construct document to be inserted
+    $collection = Config::comments_col;
     $doc = array(
         'oid' => $oid,
         'userId' => $userId,
         'text' => $text,
         'time' => $time,
     );
-    $collection = Config::comments_col;
     return mongodbInsert($collection, $doc);
 }
 
@@ -233,22 +226,19 @@ function addCommentToDB($oid, $userId, $text, $time) {
 function addPhotoToDB($oid, $userId, $src) {
     $collection = Config::pois_col;
     $query = array('_id' => new MongoId($oid));
-
-    // Check if oid exists in pois collection
     if (!mongodbFindOne($collection, $query, $doc)) {
         return false;
     } else if ($doc == NULL) {
-        echo $oid . ' was not found in datase';
+        echo $oid . ' was not found in database';
         return false;
     }
 
-    // Construct document to be inserted
+    $collection = Config::photos_col;
     $doc = array(
         'oid' => $oid,
         'userId' => $userId,
         'src' => $src
     );
-    $collection = Config::photos_col;
     return mongodbInsert($collection, $doc);
 }
 
@@ -256,7 +246,7 @@ function addPhotoToDB($oid, $userId, $src) {
 // getPoisFromDB ()
 //==============================================================================
 function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
-    // https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point
+    $collection = Config::pois_col;
     $query = array(
         'location' => array(
             '$near' => array(
@@ -268,8 +258,6 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
             ),
         ),
     );
-
-    $collection = Config::pois_col;
     ensureGeoSpatialIndexExistsInDB($collection, 'location');
     if (!mongodbFind($collection, $query, $cursor)) {
         return false;
@@ -297,12 +285,11 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
 // getCommentsFromDB ()
 //==============================================================================
 function getCommentsFromDB($oid, &$result) {
-    $query = array('oid' => $oid);
-
     $collection = Config::comments_col;
+    $query = array('oid' => $oid);
     ensureIndexExistsInDB($collection, 'oid');
     if (!mongodbFind($collection, $query, $cursor)) {
-        echo $oid . ' was not found in datase';
+        echo $oid . ' was not found in database';
         return false;
     }
 
@@ -322,12 +309,11 @@ function getCommentsFromDB($oid, &$result) {
 // getPhotosFromDB ()
 //==============================================================================
 function getPhotosFromDB($oid, &$result) {
-    $query = array('oid' => $oid);
-
     $collection = Config::photos_col;
+    $query = array('oid' => $oid);
     ensureIndexExistsInDB($collection, 'oid');
     if (!mongodbFind($collection, $query, $cursor)) {
-        echo $oid . ' was not found in datase';
+        echo $oid . ' was not found in database';
         return false;
     }
 
