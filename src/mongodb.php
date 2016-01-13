@@ -124,7 +124,7 @@ function mongodbFindOne($collection, $query, $filter, &$doc) {  // TODO: private
 //==============================================================================
 // ensureGeoSpatialIndexExistsInDB ()
 //==============================================================================
-function ensureGeoSpatialIndexExistsInDB($collection, $field) {
+function ensureGeoSpatialIndexExistsInDB($collection, $field) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
@@ -139,7 +139,7 @@ function ensureGeoSpatialIndexExistsInDB($collection, $field) {
 //==============================================================================
 // ensureIndexExistsInDB ()
 //==============================================================================
-function ensureIndexExistsInDB($collection, $field) {
+function ensureIndexExistsInDB($collection, $field) {  // TODO: private
     try {
         $db = connectMongo();
     } catch (MongoException $e) {
@@ -170,49 +170,6 @@ function addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags) {
     );
     $collection = Config::pois_col;
     return mongodbInsert($collection, $doc);
-}
-
-//==============================================================================
-// getPoisFromDB ()
-//==============================================================================
-function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
-    // Construct query
-    // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
-    $query = array(
-        'location' => array(
-            '$near' => array(
-                '$geometry' => array(
-                    'type' => 'Point',
-                    'coordinates' => array($longitude, $latitude),
-                ),
-                '$maxDistance' => $max_distance,
-            ),
-        ),
-    );
-
-    $collection = Config::pois_col;
-    ensureGeoSpatialIndexExistsInDB($collection, 'location');
-    $filter = array();
-    if (!mongodbFind($collection, $query, $filter, $cursor)) {
-        return false;
-    }
-
-    $result = array();
-    foreach ($cursor as $doc) {
-        $oid = (string)$doc['_id'];
-        $result[$oid] = array(  // TODO: $result[] =
-            'oid' => $oid,
-            'longitude' => (string)$doc['location']['coordinates'][0],
-            'latitude' => (string)$doc['location']['coordinates'][1],
-            'name' => $doc['name'],
-            'tag' => $doc['tag'],
-            'ratings' => $doc['ratings'],
-            'userId' => $doc['userId'],
-            'url' => $doc['url'],
-        );
-    }
-
-    return true;
 }
 
 //==============================================================================
@@ -282,34 +239,6 @@ function addCommentToDB($oid, $userId, $text, $time) {
 }
 
 //==============================================================================
-// getCommentsFromDB ()
-//==============================================================================
-function getCommentsFromDB($oid, &$result) {
-    $query = array(
-        'oid' => $oid,
-    );
-
-    $collection = Config::comments_col;
-    $filter = array();
-    ensureIndexExistsInDB($collection, 'oid');
-    if (!mongodbFind($collection, $query, $filter, $cursor)) {
-        echo $oid . ' was not found in datase';
-        return false;
-    }
-
-    $result = array();
-    foreach ($cursor as $doc) {
-        $result[] = array(
-            'userId' => $doc['userId'],
-            'text' => $doc['text'],
-            'time' => $doc['time'],
-        );
-    }
-
-    return true;
-}
-
-//==============================================================================
 // addPhotoToDB ()
 //==============================================================================
 function addPhotoToDB($oid, $userId, $src) {
@@ -336,12 +265,79 @@ function addPhotoToDB($oid, $userId, $src) {
 }
 
 //==============================================================================
+// getPoisFromDB ()
+//==============================================================================
+function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
+    // Construct query
+    // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
+    $query = array(
+        'location' => array(
+            '$near' => array(
+                '$geometry' => array(
+                    'type' => 'Point',
+                    'coordinates' => array($longitude, $latitude),
+                ),
+                '$maxDistance' => $max_distance,
+            ),
+        ),
+    );
+
+    $collection = Config::pois_col;
+    ensureGeoSpatialIndexExistsInDB($collection, 'location');
+    $filter = array();
+    if (!mongodbFind($collection, $query, $filter, $cursor)) {
+        return false;
+    }
+
+    $result = array();
+    foreach ($cursor as $doc) {
+        $oid = (string)$doc['_id'];
+        $result[$oid] = array(  // TODO: $result[] =
+            'oid' => $oid,
+            'longitude' => (string)$doc['location']['coordinates'][0],
+            'latitude' => (string)$doc['location']['coordinates'][1],
+            'name' => $doc['name'],
+            'tag' => $doc['tag'],
+            'ratings' => $doc['ratings'],
+            'userId' => $doc['userId'],
+            'url' => $doc['url'],
+        );
+    }
+
+    return true;
+}
+
+//==============================================================================
+// getCommentsFromDB ()
+//==============================================================================
+function getCommentsFromDB($oid, &$result) {
+    $query = array('oid' => $oid);
+
+    $collection = Config::comments_col;
+    $filter = array();
+    ensureIndexExistsInDB($collection, 'oid');
+    if (!mongodbFind($collection, $query, $filter, $cursor)) {
+        echo $oid . ' was not found in datase';
+        return false;
+    }
+
+    $result = array();
+    foreach ($cursor as $doc) {
+        $result[] = array(
+            'userId' => $doc['userId'],
+            'text' => $doc['text'],
+            'time' => $doc['time'],
+        );
+    }
+
+    return true;
+}
+
+//==============================================================================
 // getPhotosFromDB ()
 //==============================================================================
 function getPhotosFromDB($oid, &$result) {
-    $query = array(
-        'oid' => $oid,
-    );
+    $query = array('oid' => $oid);
 
     $collection = Config::photos_col;
     $filter = array();

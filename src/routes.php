@@ -51,36 +51,6 @@ function addPoi($request, $response, $args) {
 };
 
 //==============================================================================
-// getPoisByLoc ()
-//==============================================================================
-function getPoisByLoc($request, $response, $args) {
-    $params = $request->getParams();
-
-    // Check all required parameters are defined
-    $required = array('longitude', 'latitude', 'max_distance');
-    if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
-    }
-
-    // Get parameters
-    $longitude = (double)$params['longitude'];
-    $latitude = (double)$params['latitude'];
-    $max_distance = (double)$params['max_distance'] * 1000;  // from km -> meters
-
-    // Retrieve from database
-    $result = array();
-    if (getPoisFromDB($longitude, $latitude, $max_distance, $result)) {
-        $result_json = json_encode($result);
-        $response = $response->withHeader('Content-type', 'application/json');
-        $response->getBody()->write($result_json);
-    } else  {
-        $response->getBody()->write('Error: could not retrieve from db');
-    }
-    return $response;
-};
-
-//==============================================================================
 // addTag ()
 //==============================================================================
 function addTag($request, $response, $args) {
@@ -157,6 +127,36 @@ function addComment($request, $response, $args) {
         $response->getBody()->write('Ok');
     } else  {
         $response->getBody()->write('Error: could not insert into db');
+    }
+    return $response;
+};
+
+//==============================================================================
+// getPoisByLoc ()
+//==============================================================================
+function getPoisByLoc($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('longitude', 'latitude', 'max_distance');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $longitude = (double)$params['longitude'];
+    $latitude = (double)$params['latitude'];
+    $max_distance = (double)$params['max_distance'] * 1000;  // from km -> meters
+
+    // Retrieve from database
+    $result = array();
+    if (getPoisFromDB($longitude, $latitude, $max_distance, $result)) {
+        $result_json = json_encode($result);
+        $response = $response->withHeader('Content-type', 'application/json');
+        $response->getBody()->write($result_json);
+    } else  {
+        $response->getBody()->write('Error: could not retrieve from db');
     }
     return $response;
 };
