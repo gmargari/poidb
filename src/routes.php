@@ -132,6 +132,33 @@ function addComment($request, $response, $args) {
 };
 
 //==============================================================================
+// addPhoto ()
+//==============================================================================
+function addPhoto($request, $response, $args) {
+    $params = $request->getParams();
+
+    // Check all required parameters are defined
+    $required = array('oid', 'userId', 'src');
+    if (!allParamsDefined($required, $params)) {
+        $response->getBody()->write('Error: not all required parameters are defined');
+        return $response;
+    }
+
+    // Get parameters
+    $oid = (string)$params['oid'];
+    $userId = (string)$params['userId'];
+    $src = (string)$params['src'];
+
+    // Insert into database
+    if (addPhotoToDB($oid, $userId, $src)) {
+        $response->getBody()->write('Ok');
+    } else  {
+        $response->getBody()->write('Error: could not insert into db');
+    }
+    return $response;
+};
+
+//==============================================================================
 // getPoisByLoc ()
 //==============================================================================
 function getPoisByLoc($request, $response, $args) {
@@ -185,33 +212,6 @@ function getComments($request, $response, $args) {
         $response->getBody()->write($result_json);
     } else  {
         $response->getBody()->write('Error: could not retrieve from db');
-    }
-    return $response;
-};
-
-//==============================================================================
-// addPhoto ()
-//==============================================================================
-function addPhoto($request, $response, $args) {
-    $params = $request->getParams();
-
-    // Check all required parameters are defined
-    $required = array('oid', 'userId', 'src');
-    if (!allParamsDefined($required, $params)) {
-        $response->getBody()->write('Error: not all required parameters are defined');
-        return $response;
-    }
-
-    // Get parameters
-    $oid = (string)$params['oid'];
-    $userId = (string)$params['userId'];
-    $src = (string)$params['src'];
-
-    // Insert into database
-    if (addPhotoToDB($oid, $userId, $src)) {
-        $response->getBody()->write('Ok');
-    } else  {
-        $response->getBody()->write('Error: could not insert into db');
     }
     return $response;
 };

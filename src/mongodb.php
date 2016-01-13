@@ -264,8 +264,7 @@ function addPhotoToDB($oid, $userId, $src) {
 // getPoisFromDB ()
 //==============================================================================
 function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
-    // Construct query
-    // (https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point)
+    // https://docs.mongodb.org/v3.0/tutorial/query-a-2dsphere-index/#proximity-to-a-geojson-point
     $query = array(
         'location' => array(
             '$near' => array(
