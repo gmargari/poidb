@@ -15,3 +15,11 @@ function responseWithCodeMessage($response, $code, $message) {
     $response = $response->withStatus($code);
     return $response;
 }
+
+//==============================================================================
+// handleException ()
+//==============================================================================
+function handleException($e) {
+    echo "\n";
+    echo 'Exception in ' . $e->getFile() . ':' . $e->getLine() . ' : "' . $e->getMessage() . '"';
+}
