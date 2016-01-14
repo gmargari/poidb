@@ -5,7 +5,7 @@
 		"latitude": "40.626452",
 		"longitude": "22.948426",
 		"name": "White Tower",
-		"tag": ["Museum", "Landmark", "Monument"],
+		"tags": ["Museum", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/White_Tower_of_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -21,7 +21,7 @@
 		"latitude": "40.626275",
 		"longitude": "22.954619",
 		"name": "OTE Tower",
-		"tag": ["Landmark"],
+		"tags": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/OTE_Tower",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -34,7 +34,7 @@
 		"latitude": "40.629956",
 		"longitude": "22.949827",
 		"name": "Palace of Galerius",
-		"tag": ["Landmark", "Monument"],
+		"tags": ["Landmark", "Monument"],
 		"url": "https://el.wikipedia.org/wiki/%CE%91%CE%BD%CE%AC%CE%BA%CF%84%CE%BF%CF%81%CE%B1_%CF%84%CE%BF%CF%85_%CE%93%CE%B1%CE%BB%CE%AD%CF%81%CE%B9%CE%BF%CF%85",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -47,7 +47,7 @@
 		"latitude": "40.632241",
 		"longitude": "22.951743",
 		"name": "Arch of Galerius",
-		"tag": ["Landmark", "Monument"],
+		"tags": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Arch_of_Galerius_and_Rotunda",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -60,7 +60,7 @@
 		"latitude": "40.633232",
 		"longitude": "22.952729",
 		"name": "Rotunda",
-		"tag": ["Religious Site", "Landmark", "Monument"],
+		"tags": ["Religious Site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Arch_of_Galerius_and_Rotunda",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -73,7 +73,7 @@
 		"latitude": "40.635638",
 		"longitude": "22.954134",
 		"name": "Ataturk Museum",
-		"tag": ["Museum", "Landmark", "Monument"],
+		"tags": ["Museum", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Museum_(Thessaloniki)",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -86,7 +86,7 @@
 		"latitude": "40.632823",
 		"longitude": "22.946890",
 		"name": "Hagia Sophia",
-		"tag": ["Religious Site", "Landmark", "Monument"],
+		"tags": ["Religious Site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Hagia_Sophia,_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -99,7 +99,7 @@
 		"latitude": "40.632335",
 		"longitude": "22.940796",
 		"name": "Aristotelous Square",
-		"tag": ["Landmark"],
+		"tags": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/Aristotelous_Square",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -112,7 +112,7 @@
 		"latitude": "40.635734",
 		"longitude": "22.945210",
 		"name": "Bey Hamam",
-		"tag": ["Landmark", "Monument"],
+		"tags": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Bey_Hamam",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -125,7 +125,7 @@
 		"latitude": "40.637638",
 		"longitude": "22.944795",
 		"name": "Ancient Roman Agora",
-		"tag": ["Landmark", "Monument", "Museum"],
+		"tags": ["Landmark", "Monument", "Museum"],
 		"url": "https://en.wikipedia.org/wiki/Agora",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -138,7 +138,7 @@
 		"latitude": "40.638803",
 		"longitude": "22.947753",
 		"name": "Hagios Demetrios",
-		"tag": ["Religious Site", "Landmark", "Monument"],
+		"tags": ["Religious Site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Hagios_Demetrios",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -151,7 +151,7 @@
 		"latitude": "40.623919",
 		"longitude": "22.955017",
 		"name": "Museum of Byzantine Culture",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_of_Byzantine_Culture",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -164,7 +164,7 @@
 		"latitude": "40.644079",
 		"longitude": "22.961883",
 		"name": "Heptapyrgion",
-		"tag": ["Landmark", "Monument"],
+		"tags": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Heptapyrgion_(Thessaloniki)",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -177,7 +177,7 @@
 		"latitude": "40.658047",
 		"longitude": "22.931542",
 		"name": "State Museum of Contemporary Art",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/State_Museum_of_Contemporary_Art",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -190,7 +190,7 @@
 		"latitude": "40.641796",
 		"longitude": "22.954503",
 		"name": "Vlatades Monastery",
-		"tag": ["Religious Site", "Monument"],
+		"tags": ["Religious Site", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Vlatades_Monastery",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -203,7 +203,7 @@
 		"latitude": "40.641778",
 		"longitude": "22.952353",
 		"name": "Church of Hosios David",
-		"tag": ["Religious Site"],
+		"tags": ["Religious Site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Hosios_David",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -216,7 +216,7 @@
 		"latitude": "40.637690",
 		"longitude": "22.956168",
 		"name": "Church of Saint Nicholas Orphanos",
-		"tag": ["Religious Site"],
+		"tags": ["Religious Site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Saint_Nicholas_Orphanos",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -229,7 +229,7 @@
 		"latitude": "40.643166",
 		"longitude": "22.944281",
 		"name": "Church of Saint Catherine",
-		"tag": ["Religious Site"],
+		"tags": ["Religious Site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Saint_Catherine,_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -242,7 +242,7 @@
 		"latitude": "40.639170",
 		"longitude": "22.949650",
 		"name": "Alaca Imaret Mosque",
-		"tag": ["Landmark", "Monument"],
+		"tags": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Alaca_Imaret_Mosque",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -255,7 +255,7 @@
 		"latitude": "40.636793",
 		"longitude": "22.943656",
 		"name": "Church of Panagia Chalkeon",
-		"tag": ["Religious Site", "Landmark", "Monument"],
+		"tags": ["Religious Site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Panagia_Chalkeon",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -268,7 +268,7 @@
 		"latitude": "40.636600",
 		"longitude": "22.941178",
 		"name": "Bedesten of Thessaloniki",
-		"tag": ["Landmark"],
+		"tags": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/Bedesten",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -281,7 +281,7 @@
 		"latitude": "40.634980",
 		"longitude": "22.936437",
 		"name": "Ladadika",
-		"tag": ["Landmark"],
+		"tags": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/Ladadika",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -294,7 +294,7 @@
 		"latitude": "40.632290",
 		"longitude": "22.941236",
 		"name": "Statue of Aristotle",
-		"tag": ["Landmark", "Monument"],
+		"tags": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Aristotle",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -307,7 +307,7 @@
 		"latitude": "40.634966",
 		"longitude": "22.947929",
 		"name": "Church of the Acheiropoietos",
-		"tag": ["Religious Site", "Landmark", "Monument"],
+		"tags": ["Religious Site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_the_Acheiropoietos",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -320,7 +320,7 @@
 		"latitude": "40.635050",
 		"longitude": "22.937702",
 		"name": "Museum of Ancient Greek, Byzantine and Post-Byzantine Instruments",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_of_Ancient_Greek,_Byzantine_and_Post-Byzantine_Instruments",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -333,7 +333,7 @@
 		"latitude": "40.635128",
 		"longitude": "22.939543",
 		"name": "Jewish Museum of Thessaloniki",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Jewish_Museum_of_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -346,7 +346,7 @@
 		"latitude": "40.632833",
 		"longitude": "22.935490",
 		"name": "Museum of Photography, Thessaloniki",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_of_Photography,_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -359,7 +359,7 @@
 		"latitude": "40.630842",
 		"longitude": "22.943431",
 		"name": "Museum for the Macedonian Struggle",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_for_the_Macedonian_Struggle_(Thessaloniki)",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -372,7 +372,7 @@
 		"latitude": "40.627268",
 		"longitude": "22.954664",
 		"name": "Macedonian Museum of Contemporary Art",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Macedonian_Museum_of_Contemporary_Art",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -385,7 +385,7 @@
 		"latitude": "40.625170",
 		"longitude": "22.953909",
 		"name": "Archaeological Museum of Thessaloniki",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Archaeological_Museum_of_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -398,7 +398,7 @@
 		"latitude": "40.624414",
 		"longitude": "22.959927",
 		"name": "War Museum of Thessaloniki",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/War_Museum_of_Thessaloniki",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -411,7 +411,7 @@
 		"latitude": "40.632418",
 		"longitude": "22.960451",
 		"name": "Teloglion Foundation of Art",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Teloglion_Foundation_of_Art",
 		"ratings": [{
 			"userId": "tsoukj",
@@ -424,7 +424,7 @@
 		"latitude": "40.610178",
 		"longitude": "22.952120",
 		"name": "Folk Art and Ethnological Museum of Macedonia and Thrace",
-		"tag": ["Museum"],
+		"tags": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Folk_Art_and_Ethnological_Museum_of_Macedonia_and_Thrace",
 		"ratings": [{
 			"userId": "tsoukj",

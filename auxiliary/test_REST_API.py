@@ -6,10 +6,10 @@ import json
 url = 'http://localhost/poidb/public/'
 
 pois = [
-  { "longitude": "22.941178", "latitude": "40.636600", "name": "name1", "url": "http://url1.com", "userId": "userid1", "tag": [ "tag1" ] },
-  { "longitude": "22.959927", "latitude": "40.624414", "name": "name2", "url": "http://url2.com", "userId": "userid2", "tag": [ "tag1", "tag2" ] },
-  { "longitude": "22.951743", "latitude": "40.632241", "name": "name3", "url": "http://url3.com", "userId": "userid3", "tag": [ "tag2", "tag3" ] },
-  { "longitude": "22.954503", "latitude": "40.641796", "name": "name4", "url": "http://url4.com", "userId": "userid4", "tag": [ "tag3", "tag4", "tag5" ] },
+  { "longitude": "22.941178", "latitude": "40.636600", "name": "name1", "url": "http://url1.com", "userId": "userid1", "tags": [ "tag1" ] },
+  { "longitude": "22.959927", "latitude": "40.624414", "name": "name2", "url": "http://url2.com", "userId": "userid2", "tags": [ "tag1", "tag2" ] },
+  { "longitude": "22.951743", "latitude": "40.632241", "name": "name3", "url": "http://url3.com", "userId": "userid3", "tags": [ "tag2", "tag3" ] },
+  { "longitude": "22.954503", "latitude": "40.641796", "name": "name4", "url": "http://url4.com", "userId": "userid4", "tags": [ "tag3", "tag4", "tag5" ] },
 ]
 
 ratings = [
