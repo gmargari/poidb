@@ -33,7 +33,10 @@ function addPoi($request, $response, $args) {
     $latitude = (double)$params['latitude'];
     $name = (string)$params['name'];
     $userId = (string)$params['userId'];
-    $tags = (string)$params['tags'];
+    $tags = $params['tags'];
+    foreach ($tags as &$tag) {
+        $tag = (string)$tag;
+    }
     $url = (string)$params['url'];
 
     if (addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags)) {
