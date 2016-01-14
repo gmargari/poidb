@@ -24,7 +24,7 @@ require __DIR__ . '/../src/util.php';
 //==============================================================================
 function addPoi($request, $response, $args) {
     $params = $request->getParams();
-    $required_params = array('longitude', 'latitude', 'name', 'userId', 'tag', 'url');
+    $required_params = array('longitude', 'latitude', 'name', 'userId', 'tags', 'url');
     if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
@@ -33,7 +33,7 @@ function addPoi($request, $response, $args) {
     $latitude = (double)$params['latitude'];
     $name = (string)$params['name'];
     $userId = (string)$params['userId'];
-    $tags = (string)$params['tag'];
+    $tags = (string)$params['tags'];
     $url = (string)$params['url'];
 
     if (addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags)) {

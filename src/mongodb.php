@@ -154,7 +154,7 @@ function addPoiToDB($longitude, $latitude, $name, $url, $userId, $tags) {
             'type' => 'Point',
         ),
         'name' => $name,
-        'tag' => $tags,
+        'tags' => $tags,
         'ratings' => array(),
         'userId' => $userId,
         'url' => $url,
@@ -175,7 +175,7 @@ function addTagToDB($oid, $tag) {
         return false;
     }
 
-    array_push($doc['tag'], $tag);
+    array_push($doc['tags'], $tag);
     return mongodbUpdate($collection, $query, $doc);
 }
 
@@ -282,7 +282,7 @@ function getPoisFromDB($longitude, $latitude, $max_distance, &$result) {
             'longitude' => (string)$doc['location']['coordinates'][0],
             'latitude' => (string)$doc['location']['coordinates'][1],
             'name' => $doc['name'],
-            'tag' => $doc['tag'],
+            'tags' => $doc['tags'],
             'ratings' => $doc['ratings'],
             'userId' => $doc['userId'],
             'url' => $doc['url'],
