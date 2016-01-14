@@ -91,7 +91,7 @@ function mongodbFind($collection, $query, &$cursor) {  // TODO: private
         handleException($e);
         return false;
     }
-} // TODO: query -> criteria
+}
 
 //==============================================================================
 // mongodbFindOne ()
@@ -192,8 +192,19 @@ function addRatingToDB($oid, $name, $rating) {
         return false;
     }
 
-    // TODO: replace prev rating for this poi with new rating
-    array_push($doc['ratings'], array( "name" => $name, "rating" => $rating));
+    # If user has already rated this poi, replace old rating with new
+    $found = false;
+    foreach ($doc['ratings'] as &$doc_rating) {
+        if ($doc_rating['name'] == $name) {
+            $doc_rating['rating'] = $rating;
+            $found = true;
+            break;
+        }
+    }
+    # Else insert a new rating
+    if ($found == false) {
+        array_push($doc['ratings'], array( "name" => $name, "rating" => $rating));
+    }
     return mongodbUpdate($collection, $query, $doc);
 }
 
