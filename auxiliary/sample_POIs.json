@@ -60,7 +60,7 @@
 		"latitude": "40.633232",
 		"longitude": "22.952729",
 		"name": "Rotunda",
-		"tag": ["Church", "Landmark", "Monument"],
+		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Arch_of_Galerius_and_Rotunda",
 		"ratings": [{
 			"name": "tsoukj",
@@ -86,7 +86,7 @@
 		"latitude": "40.632823",
 		"longitude": "22.946890",
 		"name": "Hagia Sophia",
-		"tag": ["Church", "Landmark", "Monument"],
+		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Hagia_Sophia,_Thessaloniki",
 		"ratings": [{
 			"name": "tsoukj",
@@ -138,7 +138,7 @@
 		"latitude": "40.638803",
 		"longitude": "22.947753",
 		"name": "Hagios Demetrios",
-		"tag": ["Church", "Landmark", "Monument"],
+		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Hagios_Demetrios",
 		"ratings": [{
 			"name": "tsoukj",
@@ -190,7 +190,7 @@
 		"latitude": "40.641796",
 		"longitude": "22.954503",
 		"name": "Vlatades Monastery",
-		"tag": ["Church", "Monument"],
+		"tag": ["Religious site", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Vlatades_Monastery",
 		"ratings": [{
 			"name": "tsoukj",
@@ -203,7 +203,7 @@
 		"latitude": "40.641778",
 		"longitude": "22.952353",
 		"name": "Church of Hosios David",
-		"tag": ["Church"],
+		"tag": ["Religious site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Hosios_David",
 		"ratings": [{
 			"name": "tsoukj",
@@ -216,7 +216,7 @@
 		"latitude": "40.637690",
 		"longitude": "22.956168",
 		"name": "Church of Saint Nicholas Orphanos",
-		"tag": ["Church"],
+		"tag": ["Religious site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Saint_Nicholas_Orphanos",
 		"ratings": [{
 			"name": "tsoukj",
@@ -229,7 +229,7 @@
 		"latitude": "40.643166",
 		"longitude": "22.944281",
 		"name": "Church of Saint Catherine",
-		"tag": ["Church"],
+		"tag": ["Religious site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Saint_Catherine,_Thessaloniki",
 		"ratings": [{
 			"name": "tsoukj",
@@ -255,7 +255,7 @@
 		"latitude": "40.636793",
 		"longitude": "22.943656",
 		"name": "Church of Panagia Chalkeon",
-		"tag": ["Church", "Landmark", "Monument"],
+		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Panagia_Chalkeon",
 		"ratings": [{
 			"name": "tsoukj",
@@ -307,7 +307,7 @@
 		"latitude": "40.634966",
 		"longitude": "22.947929",
 		"name": "Church of the Acheiropoietos",
-		"tag": ["Church", "Landmark", "Monument"],
+		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_the_Acheiropoietos",
 		"ratings": [{
 			"name": "tsoukj",
