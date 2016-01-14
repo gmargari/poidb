@@ -13,9 +13,9 @@ pois = [
 ]
 
 ratings = [
-  { "name": "useridx", "rating":"1" },
-  { "name": "useridx", "rating":"2" },
-  { "name": "useridx", "rating":"3" },
+  { "userId": "useridx", "rating":"1" },
+  { "userId": "useridx", "rating":"2" },
+  { "userId": "useridx", "rating":"3" },
 ]
 
 comments = [

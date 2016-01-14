@@ -182,7 +182,7 @@ function addTagToDB($oid, $tag) {
 //==============================================================================
 // addRatingToDB ()
 //==============================================================================
-function addRatingToDB($oid, $name, $rating) {
+function addRatingToDB($oid, $userId, $rating) {
     $collection = Config::pois_col;
     $query = array('_id' => new MongoId($oid));
     if (!mongodbFindOne($collection, $query, $doc)) {
@@ -195,7 +195,7 @@ function addRatingToDB($oid, $name, $rating) {
     # If user has already rated this poi, replace old rating with new
     $found = false;
     foreach ($doc['ratings'] as &$doc_rating) {
-        if ($doc_rating['name'] == $name) {
+        if ($doc_rating['userId'] == $userId) {
             $doc_rating['rating'] = $rating;
             $found = true;
             break;
@@ -203,7 +203,7 @@ function addRatingToDB($oid, $name, $rating) {
     }
     # Else insert a new rating
     if ($found == false) {
-        array_push($doc['ratings'], array( "name" => $name, "rating" => $rating));
+        array_push($doc['ratings'], array( "userId" => $userId, "rating" => $rating));
     }
     return mongodbUpdate($collection, $query, $doc);
 }

@@ -8,10 +8,10 @@
 		"tag": ["Museum", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/White_Tower_of_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 3
 		}, {
-			"name": "mike",
+			"userId": "mike",
 			"rating": 5
 		}]
 	},
@@ -24,7 +24,7 @@
 		"tag": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/OTE_Tower",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -37,7 +37,7 @@
 		"tag": ["Landmark", "Monument"],
 		"url": "https://el.wikipedia.org/wiki/%CE%91%CE%BD%CE%AC%CE%BA%CF%84%CE%BF%CF%81%CE%B1_%CF%84%CE%BF%CF%85_%CE%93%CE%B1%CE%BB%CE%AD%CF%81%CE%B9%CE%BF%CF%85",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -50,7 +50,7 @@
 		"tag": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Arch_of_Galerius_and_Rotunda",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -63,7 +63,7 @@
 		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Arch_of_Galerius_and_Rotunda",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 3
 		}]
 	},
@@ -76,7 +76,7 @@
 		"tag": ["Museum", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Museum_(Thessaloniki)",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 3
 		}]
 	},
@@ -89,7 +89,7 @@
 		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Hagia_Sophia,_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -102,7 +102,7 @@
 		"tag": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/Aristotelous_Square",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -115,7 +115,7 @@
 		"tag": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Bey_Hamam",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 3
 		}]
 	},
@@ -128,7 +128,7 @@
 		"tag": ["Landmark", "Monument", "Museum"],
 		"url": "https://en.wikipedia.org/wiki/Agora",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -141,7 +141,7 @@
 		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Hagios_Demetrios",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -154,7 +154,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_of_Byzantine_Culture",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -167,7 +167,7 @@
 		"tag": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Heptapyrgion_(Thessaloniki)",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -180,7 +180,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/State_Museum_of_Contemporary_Art",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -193,7 +193,7 @@
 		"tag": ["Religious site", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Vlatades_Monastery",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -206,7 +206,7 @@
 		"tag": ["Religious site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Hosios_David",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -219,7 +219,7 @@
 		"tag": ["Religious site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Saint_Nicholas_Orphanos",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -232,7 +232,7 @@
 		"tag": ["Religious site"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Saint_Catherine,_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -245,7 +245,7 @@
 		"tag": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Alaca_Imaret_Mosque",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -258,7 +258,7 @@
 		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_Panagia_Chalkeon",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -271,7 +271,7 @@
 		"tag": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/Bedesten",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 3
 		}]
 	},
@@ -284,7 +284,7 @@
 		"tag": ["Landmark"],
 		"url": "https://en.wikipedia.org/wiki/Ladadika",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -297,7 +297,7 @@
 		"tag": ["Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Aristotle",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -310,7 +310,7 @@
 		"tag": ["Religious site", "Landmark", "Monument"],
 		"url": "https://en.wikipedia.org/wiki/Church_of_the_Acheiropoietos",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -323,7 +323,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_of_Ancient_Greek,_Byzantine_and_Post-Byzantine_Instruments",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -336,7 +336,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Jewish_Museum_of_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -349,7 +349,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_of_Photography,_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -362,7 +362,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Museum_for_the_Macedonian_Struggle_(Thessaloniki)",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -375,7 +375,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Macedonian_Museum_of_Contemporary_Art",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -388,7 +388,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Archaeological_Museum_of_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	},
@@ -401,7 +401,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/War_Museum_of_Thessaloniki",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 4
 		}]
 	},
@@ -414,7 +414,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Teloglion_Foundation_of_Art",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 3
 		}]
 	},
@@ -427,7 +427,7 @@
 		"tag": ["Museum"],
 		"url": "https://en.wikipedia.org/wiki/Folk_Art_and_Ethnological_Museum_of_Macedonia_and_Thrace",
 		"ratings": [{
-			"name": "tsoukj",
+			"userId": "tsoukj",
 			"rating": 5
 		}]
 	}

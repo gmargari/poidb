@@ -68,16 +68,16 @@ function addTag($request, $response, $args) {
 //==============================================================================
 function addRating($request, $response, $args) {
     $params = $request->getParams();
-    $required_params = array('oid', 'rating', 'name');
+    $required_params = array('oid', 'rating', 'userId');
     if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
     }
 
     $oid = (string)$params['oid'];
-    $name = (string)$params['name'];
+    $userId = (string)$params['userId'];
     $rating = (string)$params['rating'];
 
-    if (addRatingToDB($oid, $name, $rating)) {
+    if (addRatingToDB($oid, $userId, $rating)) {
         return responseWithCodeMessage($response, 200, "OK");
     } else  {
         return responseWithCodeMessage($response, 500, 'Could not insert into db');
