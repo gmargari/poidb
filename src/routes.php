@@ -26,7 +26,7 @@ function addPoi($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('longitude', 'latitude', 'name', 'userId', 'tags', 'url');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $longitude = (double)$params['longitude'];
@@ -53,7 +53,7 @@ function addTag($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('oid', 'tag');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $oid = (string)$params['oid'];
@@ -73,7 +73,7 @@ function addRating($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('oid', 'rating', 'userId');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $oid = (string)$params['oid'];
@@ -94,7 +94,7 @@ function addComment($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('oid', 'userId', 'text', 'time');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $oid = (string)$params['oid'];
@@ -116,7 +116,7 @@ function addPhoto($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('oid', 'userId', 'src');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $oid = (string)$params['oid'];
@@ -137,7 +137,7 @@ function getPoisByLoc($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('longitude', 'latitude', 'max_distance');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $longitude = (double)$params['longitude'];
@@ -150,7 +150,7 @@ function getPoisByLoc($request, $response, $args) {
         $response = $response->withHeader('Content-type', 'application/json');
         return responseWithCodeMessage($response, 200, $result);
     } else  {
-        return responseWithCodeMessage($response, 500, 'Could not retrieve from db');
+        return responseWithCodeMessage($response, 500, 'Database error');
     }
 }
 
@@ -161,7 +161,7 @@ function getComments($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('oid');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $oid = (string)$params['oid'];
@@ -172,7 +172,7 @@ function getComments($request, $response, $args) {
         $response = $response->withHeader('Content-type', 'application/json');
         return responseWithCodeMessage($response, 200, $result);
     } else  {
-        return responseWithCodeMessage($response, 500, 'Could not retrieve from db');
+        return responseWithCodeMessage($response, 500, 'Database error');
     }
 }
 
@@ -183,7 +183,7 @@ function getPhotos($request, $response, $args) {
     $params = $request->getParams();
     $required_params = array('oid');
     if (!allParamsDefined($required_params, $params)) {
-        return responseWithCodeMessage($response, 400, 'Not all required parameters are defined');
+        return responseWithCodeMessage($response, 400, 'Parameter missing');
     }
 
     $oid = (string)$params['oid'];
@@ -194,6 +194,6 @@ function getPhotos($request, $response, $args) {
         $response = $response->withHeader('Content-type', 'application/json');
         return responseWithCodeMessage($response, 200, $result);
     } else  {
-        return responseWithCodeMessage($response, 500, 'Could not retrieve from db');
+        return responseWithCodeMessage($response, 500, 'Database error');
     }
 }
