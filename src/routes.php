@@ -13,8 +13,10 @@ $app->post('/tag', 'addTag');
 $app->post('/rating', 'addRating');
 $app->post('/comment', 'addComment');
 $app->get('/comment', 'getComments');
+$app->get('/comment/{oid}', 'getComments');
 $app->post('/photo', 'addPhoto');
 $app->get('/photo', 'getPhotos');
+$app->get('/photo/{oid}', 'getPhotos');
 
 require __DIR__ . '/../src/mongodb.php';
 require __DIR__ . '/../src/util.php';
@@ -158,7 +160,7 @@ function getPoisByLoc($request, $response, $args) {
 // getComments ()
 //==============================================================================
 function getComments($request, $response, $args) {
-    $params = $request->getParams();
+    $params = (count($args) > 0) ? $args : $request->getParams();
     $required_params = array('oid');
     if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Parameter missing');
@@ -180,7 +182,7 @@ function getComments($request, $response, $args) {
 // getPhotos ()
 //==============================================================================
 function getPhotos($request, $response, $args) {
-    $params = $request->getParams();
+    $params = (count($args) > 0) ? $args : $request->getParams();
     $required_params = array('oid');
     if (!allParamsDefined($required_params, $params)) {
         return responseWithCodeMessage($response, 400, 'Parameter missing');
